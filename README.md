@@ -1,1 +1,1 @@
-# COVID-19 https://covid19.aqibteam.com/home
+# COVID-19 https://covid19.aqibteam.com
