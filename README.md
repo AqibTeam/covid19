@@ -1,1 +1,1 @@
-# COVID-19 DETAILS with IONIC  V5 based on https://corona.lmao.ninja/
+# COVID-19 https://covid19.aqibteam.com/home
