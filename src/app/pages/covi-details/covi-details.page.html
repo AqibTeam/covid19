@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>    <ion-title *ngIf="country_details">{{country_details['country']}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="country_details">
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-title>Data</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>T. Cases</ion-label>
+            <ion-badge color="danger" slot="end">{{country_details['cases'] | number}}</ion-badge>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>Today Cases</ion-label>
+            <ion-badge color="danger" slot="end">{{country_details['todayCases'] | number}}</ion-badge>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>T. Deaths</ion-label>
+            <ion-badge color="danger" slot="end">{{country_details['deaths'] | number}}</ion-badge>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>Today Deaths</ion-label>
+            <ion-badge color="danger" slot="end">{{country_details['todayDeaths'] | number}}</ion-badge>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>Recovered</ion-label>
+            <ion-badge color="success" slot="end">{{country_details['recovered'] | number}}</ion-badge>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>Critical</ion-label>
+            <ion-badge color="danger" slot="end">{{country_details['critical'] | number }}</ion-badge>
+          </ion-item>
+        </ion-col>
+        </ion-row>
+    </ion-card-content>
+  </ion-card>
+  
+
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-title>History chart</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Scrollable Segment -->
+<ion-segment scrollable value="bar" (ionChange)="setBarType($event)">
+  <ion-segment-button value="horizontalBar">
+    <ion-icon name="stats-chart-outline"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="bar">
+    <ion-icon name="bar-chart-outline"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="line">
+    <ion-icon name="cellular-outline"></ion-icon>
+  </ion-segment-button>
+</ion-segment>
+      <canvas #barChart></canvas>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

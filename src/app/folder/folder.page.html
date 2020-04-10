@@ -1,0 +1,111 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-title>Resume</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card-content *ngIf="data">
+    <ion-card class="welcome-card">
+      <ion-card-header>
+        <ion-card-title>Resume (Updated at: {{ getDateFormat(data['updated']) }})</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col size-lg="6" size-md="6" size-sm="12" size="12">
+            <ion-item>
+              <ion-label>TOT. Cases</ion-label>
+              <ion-badge color="danger" slot="end">{{data['cases'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size-lg="6" size-md="6" size-sm="12" size="12">
+            <ion-item>
+              <ion-label>TDY. Cases</ion-label>
+              <ion-badge color="danger" slot="end">{{data['todayCases'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size-lg="6" size-md="6" size-sm="12" size="12">
+            <ion-item>
+              <ion-label>TOT. Deaths</ion-label>
+              <ion-badge color="danger" slot="end">{{data['deaths'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size-lg="6" size-md="6" size-sm="12" size="12">
+            <ion-item>
+              <ion-label>TDY. Deaths</ion-label>
+              <ion-badge color="danger" slot="end">{{data['todayDeaths'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Recovered</ion-label>
+              <ion-badge color="success" slot="end">{{data['recovered'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Active</ion-label>
+              <ion-badge color="danger" slot="end">{{data['active'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Critical</ion-label>
+              <ion-badge color="danger" slot="end">{{data['critical'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Cases per one million</ion-label>
+              <ion-badge color="danger" slot="end">{{data['casesPerOneMillion'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Deaths per one million</ion-label>
+              <ion-badge color="danger" slot="end">{{data['deathsPerOneMillion'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size-lg="6" size-md="6" size-sm="12" size="12">
+            <ion-item>
+              <ion-label>Tests</ion-label>
+              <ion-badge color="danger" slot="end">{{data['tests'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size-lg="6" size-md="6" size-sm="12" size="12">
+            <ion-item>
+              <ion-label>Tests per one million</ion-label>
+              <ion-badge color="danger" slot="end">{{data['testsPerOneMillion'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Affected countries</ion-label>
+              <ion-badge color="danger" slot="end">{{data['affectedCountries'] | number}}</ion-badge>
+            </ion-item>
+          </ion-col>
+          </ion-row>
+
+          <ion-button expand="full" [routerLink]="['/', 'covi-card']">Countries list</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+    <ion-row *ngIf="news">
+      <ion-col size-lg="6" size-md="6" size-sm="12" size="12" *ngFor="let single_news of news">
+        <ion-card>
+          <ion-card-header>
+            <img src="{{single_news['featured_image_url']}}">
+          </ion-card-header>
+        
+          <ion-card-content>{{single_news['title']['rendered']}}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  
+  </ion-card-content>
+
+</ion-content>

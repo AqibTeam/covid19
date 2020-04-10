@@ -1,0 +1,142 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Covid-19 (Card)</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-searchbar [(ngModel)]="searchCountry" autocomplete="on" (keyup)="search($event)" autocorrect="off" placeholder="Filter by country name" clearIcon="off"></ion-searchbar>
+      </ion-card-content>
+    </ion-card>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="countries">
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col size-lg="12" size-md="12" size-sm="12" size="12" *ngFor="let single_country of items">
+          <ion-card>
+            <ion-item>
+              <img src="{{single_country['countryInfo']['flag']}}" width="50px" height="50px">
+              <ion-label style="text-align: center">{{single_country['country']}}</ion-label>
+              <ion-button fill="outline" slot="end"  [routerLink]="['/', 'covi-details', single_country['country']]"><ion-icon name="add-outline"></ion-icon> More details</ion-button>
+            </ion-item>
+          
+            <ion-card-content>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label>Cases</ion-label>
+                    <ion-badge color="danger" slot="end">{{single_country['cases'] | number}}</ion-badge>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label>TDY. Cases</ion-label>
+                    <ion-badge color="danger" slot="end">{{single_country['todayCases'] | number}}</ion-badge>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label>Deaths</ion-label>
+                    <ion-badge color="danger" slot="end">{{single_country['deaths'] | number}}</ion-badge>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label>TDY Deaths</ion-label>
+                    <ion-badge color="danger" slot="end">{{single_country['todayDeaths'] | number}}</ion-badge>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label>Recovered</ion-label>
+                    <ion-badge color="success" slot="end">{{single_country['recovered'] | number}}</ion-badge>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label>Critical</ion-label>
+                    <ion-badge color="danger" slot="end">{{single_country['critical'] | number }}</ion-badge>
+                  </ion-item>
+                </ion-col>
+                </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </div>
+    
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+
+  </ion-infinite-scroll>
+    <div *ngIf="!countries">
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </div>
+    
+      <ion-list>
+        <ion-list-header>
+          <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+        </ion-list-header>
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-avatar>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-skeleton-text animated style="width: 27px; height: 27px" slot="start"></ion-skeleton-text>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+</ion-content>
